@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SURAN — Una seconda vita per il telefono che hai già</title>
+  <meta name="description" content="SURAN ridà vita agli smartphone Android che possiedi già, trasformandoli in dispositivi semplici, veloci ed essenziali. Candidati al Programma Beta.">
+
+  <!-- SEO: URL canonica e direttive per i motori di ricerca.
+       NOTA: sostituire "https://www.suran.it/" con il dominio reale non appena disponibile. -->
+  <link rel="canonical" href="https://www.suran.it/">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#F7F5F1">
+
+  <!-- Favicon: derivata dal logo SVG del brand -->
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+
+  <!-- Open Graph: anteprima su Facebook, LinkedIn, WhatsApp, ecc.
+       NOTA: "og:image" è un placeholder — sostituire con un asset reale 1200×630px
+       prima del lancio (un'immagine SVG non è affidabile per le anteprime social). -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="SURAN">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:url" content="https://www.suran.it/">
+  <meta property="og:title" content="SURAN — Una seconda vita per il telefono che hai già">
+  <meta property="og:description" content="SURAN ridà vita agli smartphone Android che possiedi già, trasformandoli in dispositivi semplici, veloci ed essenziali. Candidati al Programma Beta.">
+  <meta property="og:image" content="https://www.suran.it/assets/og-image.jpg">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SURAN — Una seconda vita per il telefono che hai già">
+  <meta name="twitter:description" content="SURAN ridà vita agli smartphone Android che possiedi già, trasformandoli in dispositivi semplici, veloci ed essenziali.">
+  <meta name="twitter:image" content="https://www.suran.it/assets/og-image.jpg">
+
+  <!-- Dati strutturati schema.org: aiutano i motori di ricerca a riconoscere SURAN come organizzazione -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "SURAN",
+    "url": "https://www.suran.it/",
+    "logo": "https://www.suran.it/logo.svg",
+    "description": "SURAN ridà vita agli smartphone Android inutilizzati, trasformandoli in dispositivi semplici, veloci ed essenziali."
+  }
+  </script>
+
+  <!-- Foglio di stile principale: contiene palette, tipografia, spacing, griglia e componenti del Design System -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       HEADER / NAVIGAZIONE
+       Header minimale: logo/wordmark, link di navigazione essenziali
+       e un'unica CTA, coerente con la regola "una sola azione che
+       conta" del Design System.
+
+       Su schermi piccoli i link di navigazione sono raccolti dentro
+       #mobile-menu e nascosti dietro il pulsante #mobile-menu-toggle
+       (comportamento gestito da script.js). Su desktop, con le
+       opportune regole in style.css, #mobile-menu può invece essere
+       mostrato in linea e il pulsante toggle nascosto.
+  ============================================================= -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a href="#hero" class="logo" aria-label="SURAN — torna all'inizio della pagina">
+        <!-- Logo: segno monolinea a doppio arco asimmetrico (stesso path di logo.svg),
+             inline per evitare una richiesta HTTP aggiuntiva ed ereditare il colore del testo. -->
+        <svg class="logo__mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <path d="M 50 15 A 19 19 0 0 1 50 53 A 16 16 0 0 0 50 85" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="logo__wordmark">SURAN</span>
+      </a>
+
+      <!-- Pulsante hamburger: visibile solo su mobile (via CSS).
+           aria-expanded viene aggiornato da script.js in base allo stato del menu. -->
+      <button
+        type="button"
+        id="mobile-menu-toggle"
+        class="mobile-menu-toggle"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Apri il menu di navigazione"
+      >
+        <span class="mobile-menu-toggle__bar" aria-hidden="true"></span>
+        <span class="mobile-menu-toggle__bar" aria-hidden="true"></span>
+        <span class="mobile-menu-toggle__bar" aria-hidden="true"></span>
+      </button>
+
+      <!-- Menu di navigazione: su mobile è un pannello a comparsa
+           (classe "is-open" gestita da script.js), su desktop può
+           essere mostrato in linea nell'header. -->
+      <nav id="mobile-menu" class="site-nav" aria-label="Navigazione principale">
+        <!-- Pulsante di chiusura sempre visibile mentre il pannello è aperto:
+             prima di questo fix, il pannello copriva anche l'hamburger (z-index
+             più alto), lasciando l'utente senza un modo visibile di chiuderlo. -->
+        <button type="button" class="site-nav__close" id="mobile-menu-close" aria-label="Chiudi il menu di navigazione">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <a href="#come-funziona" class="site-nav__link">Come funziona</a>
+        <a href="#programma-beta" class="site-nav__link">Programma Beta</a>
+        <a href="#faq" class="site-nav__link">FAQ</a>
+        <a href="#candidatura" class="btn btn--primary btn--small">Candidati al Beta</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============================================================
+         HERO
+         Prima schermata: aggancio immediato sul concetto centrale
+         del brand ("il tuo telefono non è vecchio, è appesantito").
+    ============================================================= -->
+    <section id="hero" class="section hero" aria-labelledby="hero-title">
+      <div class="container hero__inner">
+        <h1 id="hero-title" class="hero__title">
+          Il tuo telefono non è vecchio.<br>
+          È solo appesantito.
+        </h1>
+        <p class="hero__subtitle">
+          SURAN dà nuova vita agli smartphone Android che possiedi già.
+          Più veloci. Più semplici. Più tuoi.
+        </p>
+        <div class="hero__cta">
+          <a href="#candidatura" class="btn btn--primary">Candidati al Programma Beta</a>
+          <p class="hero__cta-note">Posti limitati. Nessun costo.</p>
+        </div>
+
+        <!-- Immagine hero: telefono reale, usato, luce naturale —
+             vedi linee guida "Stile fotografico" del Design System -->
+        <figure class="hero__media">
+          <img src="assets/hero-phone.jpg" alt="Smartphone Android usato, tenuto in mano, con interfaccia essenziale attiva">
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         IL PROBLEMA
+         Aggancio emotivo: il cassetto pieno di telefoni inutilizzati.
+    ============================================================= -->
+    <section id="problema" class="section section--alt" aria-labelledby="problema-title">
+      <div class="container container--narrow">
+        <h2 id="problema-title" class="section__title">C'è un telefono spento in un cassetto.</h2>
+        <p class="section__text">
+          Non è rotto. Non è troppo vecchio per essere usato. È solo diventato lento,
+          ingombro di app che non apri più, con una batteria che non arriva a sera.
+        </p>
+        <p class="section__text">
+          Così l'hai sostituito. Non perché non funzionasse più — ma perché nessuno
+          ti ha mai mostrato come farlo funzionare bene ancora.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         LA SOLUZIONE
+         Rivelazione: cosa fa davvero SURAN.
+    ============================================================= -->
+    <section id="soluzione" class="section" aria-labelledby="soluzione-title">
+      <div class="container container--narrow">
+        <h2 id="soluzione-title" class="section__title">Non un telefono nuovo. Il tuo, di nuovo.</h2>
+        <p class="section__text">
+          SURAN interviene sul software del dispositivo che hai già. Rimuoviamo il
+          superfluo. Eliminiamo i rallentamenti. Ricostruiamo l'esperienza attorno
+          a ciò che conta: chiamare, scrivere, muoversi nel mondo.
+        </p>
+        <p class="section__text">
+          Il risultato non è un telefono diverso. È lo stesso telefono, senza tutto
+          quello che lo rallentava.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         COME FUNZIONA
+         Processo reale in 3 passaggi: qui la numerazione è
+         giustificata, perché descrive un vero ordine sequenziale.
+    ============================================================= -->
+    <section id="come-funziona" class="section section--alt" aria-labelledby="come-funziona-title">
+      <div class="container">
+        <h2 id="come-funziona-title" class="section__title section__title--center">Tre passaggi. Nient'altro.</h2>
+
+        <ol class="steps">
+          <li class="step">
+            <span class="step__number" aria-hidden="true">01</span>
+            <h3 class="step__title">Candidati</h3>
+            <p class="step__text">Ci dici che telefono hai. Bastano due minuti.</p>
+          </li>
+          <li class="step">
+            <span class="step__number" aria-hidden="true">02</span>
+            <h3 class="step__title">Prepariamo il tuo dispositivo</h3>
+            <p class="step__text">Ti accompagniamo in ogni fase, con i tuoi dati sempre al sicuro.</p>
+          </li>
+          <li class="step">
+            <span class="step__number" aria-hidden="true">03</span>
+            <h3 class="step__title">Ricomincia a usarlo</h3>
+            <p class="step__text">Un telefono più leggero. Una mente più leggera.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PRIMA E DOPO
+         Tabella comparativa: dati reali, non decorazione.
+         Uso di <table> semantica con <caption> per accessibilità.
+    ============================================================= -->
+    <section id="prima-dopo" class="section" aria-labelledby="prima-dopo-title">
+      <div class="container container--narrow">
+        <h2 id="prima-dopo-title" class="section__title section__title--center">Stessa scocca. Esperienza diversa.</h2>
+
+        <table class="compare-table">
+          <caption class="visually-hidden">Confronto tra l'esperienza d'uso del telefono prima e dopo l'intervento SURAN</caption>
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Prima</th>
+              <th scope="col">Dopo SURAN</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Avvio app</th>
+              <td>Lento, imprevedibile</td>
+              <td>Immediato</td>
+            </tr>
+            <tr>
+              <th scope="row">Batteria</th>
+              <td>Non arriva a sera</td>
+              <td>Dura tutto il giorno</td>
+            </tr>
+            <tr>
+              <th scope="row">Schermata home</th>
+              <td>Affollata, caotica</td>
+              <td>Essenziale, chiara</td>
+            </tr>
+            <tr>
+              <th scope="row">Notifiche</th>
+              <td>Continue, invadenti</td>
+              <td>Solo quelle che contano</td>
+            </tr>
+            <tr>
+              <th scope="row">Sensazione d'uso</th>
+              <td>Frustrazione</td>
+              <td>Calma</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="section__text section__text--muted">
+          Nessun componente cambiato. Nessuna scocca sostituita.
+          Solo tutto ciò che non serviva più, tolto.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FEATURE (Cosa ottieni)
+         Elenco dei benefici concreti, non tecnicismi.
+    ============================================================= -->
+    <section id="feature" class="section section--alt" aria-labelledby="feature-title">
+      <div class="container">
+        <h2 id="feature-title" class="section__title section__title--center">Meno cose. Fatte meglio.</h2>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <h3 class="feature-card__title">Velocità ritrovata</h3>
+            <p class="feature-card__text">App e processi superflui non rallentano più ogni gesto. Il telefono risponde come dovrebbe, subito.</p>
+          </article>
+
+          <article class="feature-card">
+            <h3 class="feature-card__title">Autonomia più lunga</h3>
+            <p class="feature-card__text">Meno in esecuzione, più ore di batteria. La stessa scocca, un giorno intero in più.</p>
+          </article>
+
+          <article class="feature-card">
+            <h3 class="feature-card__title">Un'interfaccia che respira</h3>
+            <p class="feature-card__text">Nessuna schermata affollata, nessuna icona che compete per la tua attenzione. Solo ciò che usi davvero.</p>
+          </article>
+
+          <article class="feature-card">
+            <h3 class="feature-card__title">Meno interruzioni</h3>
+            <p class="feature-card__text">Le notifiche tornano a essere una scelta, non un assedio.</p>
+          </article>
+
+          <article class="feature-card">
+            <h3 class="feature-card__title">I tuoi dati, protetti</h3>
+            <p class="feature-card__text">Ogni intervento è pensato per rispettare ciò che è tuo, dall'inizio alla fine del processo.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PROGRAMMA BETA
+         Spiegazione del programma + CTA primaria intermedia.
+    ============================================================= -->
+    <section id="programma-beta" class="section" aria-labelledby="beta-title">
+      <div class="container container--narrow">
+        <h2 id="beta-title" class="section__title">Stiamo costruendo SURAN con le prime persone che ci crederanno.</h2>
+        <p class="section__text">
+          Il Programma Beta è gratuito, ed è aperto a un numero limitato di
+          partecipanti. In cambio del tuo tempo e della tua sincerità, avrai
+          accesso a SURAN prima di chiunque altro — e un ruolo reale in ciò
+          che diventerà.
+        </p>
+        <p class="section__text">
+          Non ti proponiamo un prodotto finito. Ti chiediamo di aiutarci a
+          costruire quello giusto.
+        </p>
+        <a href="#candidatura" class="btn btn--primary">Candidati al Programma Beta</a>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FORM DI CANDIDATURA
+         CTA primaria della pagina. Campi minimi per ridurre l'attrito,
+         label sempre visibili (mai solo placeholder) per accessibilità.
+    ============================================================= -->
+    <section id="candidatura" class="section section--alt" aria-labelledby="candidatura-title">
+      <div class="container container--narrow">
+        <h2 id="candidatura-title" class="section__title section__title--center">Candidati al Programma Beta</h2>
+        <p class="section__text section__text--center">Ci vogliono due minuti. Ti risponderemo di persona.</p>
+
+        <!-- Il form invia i dati tramite script.js (non incluso in questo file) -->
+        <form id="form-candidatura" class="form" novalidate>
+
+          <div class="form__field">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" name="nome" autocomplete="name" required>
+          </div>
+
+          <div class="form__field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" required>
+          </div>
+
+          <div class="form__field">
+            <label for="modello">Modello di smartphone</label>
+            <input type="text" id="modello" name="modello" placeholder="Es. Samsung Galaxy S9, oppure «non lo so»">
+          </div>
+
+          <div class="form__field">
+            <label for="inutilizzo">Da quanto tempo non lo usi, e perché</label>
+            <textarea id="inutilizzo" name="inutilizzo" rows="3"></textarea>
+          </div>
+
+          <div class="form__field">
+            <label for="motivazione">Cosa ti farebbe dire sì a SURAN? <span class="form__optional">(facoltativo)</span></label>
+            <textarea id="motivazione" name="motivazione" rows="3"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn--primary btn--full">Invia la candidatura</button>
+
+          <p class="form__note">Nessuna carta di credito. Nessun impegno. Solo due minuti del tuo tempo.</p>
+
+          <!-- Contenitore per eventuali messaggi di conferma/errore gestiti da script.js -->
+          <p id="form-feedback" class="form__feedback" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FAQ
+         Domande frequenti in formato accessibile con <details>/<summary>,
+         così da non richiedere JavaScript per l'interazione base.
+    ============================================================= -->
+    <section id="faq" class="section" aria-labelledby="faq-title">
+      <div class="container container--narrow">
+        <h2 id="faq-title" class="section__title section__title--center">Domande frequenti</h2>
+
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary class="faq-item__question">I miei dati sono al sicuro?</summary>
+            <p class="faq-item__answer">Sì. Ogni fase del processo è progettata per proteggere le tue informazioni personali. Non accediamo a nulla che non sia necessario, e ti guidiamo passo per passo prima di ogni intervento.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-item__question">Quali smartphone sono supportati?</summary>
+            <p class="faq-item__answer">Stiamo definendo l'elenco completo insieme ai primi partecipanti al Beta. Se hai un dubbio sul tuo modello, candidati comunque: te lo diremo di persona.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-item__question">Quanto costa partecipare?</summary>
+            <p class="faq-item__answer">Nulla. Il Programma Beta è gratuito. In cambio, ti chiediamo solo un feedback onesto su come stai vivendo l'esperienza.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-item__question">Devo capire di tecnologia per partecipare?</summary>
+            <p class="faq-item__answer">No. Ti accompagniamo noi in ogni passaggio, con un linguaggio semplice e senza scorciatoie tecniche.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-item__question">Cosa succede dopo che mi candido?</summary>
+            <p class="faq-item__answer">Ti contatteremo direttamente, appena il tuo profilo corrisponde alla prossima fase del Beta. Nessuna attesa anonima: una risposta vera, da persone vere.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CTA FINALE
+         Ultimo richiamo all'azione prima del footer.
+    ============================================================= -->
+    <section id="cta-finale" class="section section--alt section--cta-final" aria-labelledby="cta-finale-title">
+      <div class="container container--narrow">
+        <h2 id="cta-finale-title" class="section__title section__title--center">Il telefono che hai già può ancora sorprenderti.</h2>
+        <p class="section__text section__text--center">
+          Non serve comprarne uno nuovo. Serve solo dargli la possibilità di
+          tornare quello che era — o di diventare qualcosa di meglio.
+        </p>
+        <div class="cta-final__action">
+          <a href="#candidatura" class="btn btn--primary">Candidati al Programma Beta</a>
+          <p class="hero__cta-note">Due minuti. Nessun impegno.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+       Chiusura minimale, coerente con il tono onesto del brand.
+  ============================================================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <p class="site-footer__message">
+        SURAN è agli inizi. Stiamo cercando le prime persone che ci aiuteranno a costruirlo bene.
+      </p>
+      <a href="#candidatura" class="btn btn--primary btn--small">Candidati ora</a>
+
+      <p class="site-footer__tagline">SURAN — Una seconda vita per il telefono che hai già.</p>
+
+      <nav class="site-footer__links" aria-label="Link secondari del footer">
+        <a href="#">Contatti</a>
+        <a href="#">Privacy</a>
+        <a href="#programma-beta">Programma Beta</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Script principale: gestisce invio form, animazioni scroll-triggered e interazioni -->
+  <script src="script.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img">
+  <title>SURAN</title>
+  <desc>Segno minimale composto da una singola S monolinea, costruita da due archi geometrici di raggio diverso, con tratto continuo ed estremità arrotondate.</desc>
+
+  <!--
+    Costruzione geometrica (non calligrafica):
+    - Arco superiore: cerchio r=19, da (50,15) a (50,53), bulge a destra
+    - Arco inferiore: cerchio r=16, da (50,53) a (50,85), bulge a sinistra
+    I due raggi sono volutamente diversi (19 e 16): non è una ripetizione
+    identica, ma una continuazione che si evolve — la "seconda vita".
+    Un solo tratto continuo, mai interrotto: simboleggia la continuità.
+    Le due estremità sono aperte (non un anello chiuso): il segno non si
+    conclude su se stesso, resta un flusso che può proseguire oltre i suoi
+    margini.
+  -->
+  <path
+    d="M 50 15 A 19 19 0 0 1 50 53 A 16 16 0 0 0 50 85"
+    fill="none"
+    stroke="#3F4A3C"
+    stroke-width="11"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
