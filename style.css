@@ -69,7 +69,7 @@ table {
   --color-surface: #FFFFFF;       /* superficie card/form, leggero distacco dal fondo */
 
   --color-text: #1A1918;          /* testo primario: quasi-nero caldo */
-  --color-text-secondary: #6E6A63;/* testo secondario: sottotitoli, micro-copy */
+  --color-text-secondary: #5F5B54;/* testo secondario: sottotitoli, micro-copy (fix contrasto WCAG AA) */
   --color-border: #DEDAD2;        /* bordi sottili, mai neri puri */
 
   /* --- Colore: accento unico (verde muschio) --- */
@@ -78,7 +78,7 @@ table {
   --color-accent-contrast: #F7F5F1; /* testo sopra sfondo accento */
 
   /* --- Colore: stati funzionali --- */
-  --color-error: #B5533C;         /* terracotta desaturato, mai rosso semaforo */
+  --color-error: #9C4530;         /* terracotta scurito (fix contrasto WCAG AA, ~5.8:1 su fondo) */
   --color-success: #5C6B58;       /* variante chiara dell'accento */
 
   /* --- Tipografia ---
@@ -462,17 +462,53 @@ p {
 }
 
 .hero__cta {
-  margin-bottom: var(--space-7);
+  margin-bottom: var(--space-8); /* più respiro prima del visual (fix hero) */
 }
 
 .hero__cta-note {
   margin-top: var(--space-2);
 }
 
+/* Area fotografica della hero. #FAFAF8 è intenzionalmente diverso da
+   --color-bg (#F7F5F1): qui rappresenta il fondale dello scatto prodotto,
+   non un colore di sistema — resta scoped a questo contenitore, il resto
+   della palette del Design System non cambia. Molto spazio negativo,
+   ombra leggera invece della card piena usata in precedenza: la foto deve
+   respirare, non riempire il contenitore. */
 .hero__media {
+  background-color: #FAFAF8;
   border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: var(--shadow-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8) var(--space-5);
+  min-height: 420px;
+}
+
+.hero__media img {
+  /* Quando la fotografia reale sostituirà il placeholder: il telefono
+     occupa ~40% della larghezza dell'area, mai a piena larghezza. */
+  width: 40%;
+  min-width: 220px;
+  height: auto;
+}
+
+/* --- Placeholder strutturale (da rimuovere quando arriva la foto reale) --- */
+.hero__media-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.hero__media-phone {
+  width: 40%;
+  max-width: 220px;
+  aspect-ratio: 9 / 19.5;
+  background-color: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  border-radius: 28px;
+  box-shadow: 0 24px 48px -20px rgba(26, 25, 24, 0.15); /* ombra molto leggera, non un box-shadow da card */
 }
 
 
@@ -489,6 +525,13 @@ p {
 .step {
   text-align: center;
   padding: var(--space-5);
+}
+
+.step__icon {
+  width: 32px;
+  height: 32px;
+  color: var(--color-accent);
+  margin-bottom: var(--space-3);
 }
 
 .step__number {
@@ -617,9 +660,49 @@ p {
   border-color: var(--color-accent);
 }
 
+/* Stato di errore: guidato dall'attributo aria-invalid già impostato da
+   script.js per l'accessibilità — un'unica fonte di verità, niente
+   duplicazione tra classi CSS e stili inline. */
+.form__field input[aria-invalid="true"],
+.form__field textarea[aria-invalid="true"] {
+  border-color: var(--color-error);
+}
+
 .form__field textarea {
   resize: vertical;
   min-height: 6rem;
+}
+
+/* Contenitore <details> dei campi facoltativi: stesso pattern accessibile
+   già usato per la FAQ, per ridurre l'attrito visivo iniziale del form. */
+.form__more {
+  margin-bottom: var(--space-4);
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-4);
+}
+
+.form__more-summary {
+  cursor: pointer;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  list-style: none;
+}
+
+.form__more-summary::-webkit-details-marker {
+  display: none;
+}
+
+.form__more-summary::before {
+  content: "+ ";
+}
+
+.form__more[open] .form__more-summary::before {
+  content: "– ";
+}
+
+.form__more[open] .form__more-summary {
+  margin-bottom: var(--space-4);
 }
 
 .form__note {
@@ -636,6 +719,10 @@ p {
 
 .form__feedback:empty {
   display: none;
+}
+
+.form__feedback--error {
+  color: var(--color-error);
 }
 
 /* Messaggio di errore inline sotto ai campi obbligatori,
@@ -881,6 +968,11 @@ summary:focus-visible {
 
   .hero__title {
     max-width: 20ch;
+  }
+
+  .hero__media {
+    min-height: 560px;
+    padding: var(--space-9) var(--space-6);
   }
 
   .feature-grid {

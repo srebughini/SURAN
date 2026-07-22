@@ -9,15 +9,6 @@
 
 'use strict';
 
-/* ==========================================================================
-   CONFIGURAZIONE
-   ========================================================================== */
-
-// URL del servizio che riceve le candidature al Programma Beta.
-// PLACEHOLDER: sostituire con l'endpoint reale prima del rilascio in produzione.
-const FORM_ENDPOINT = 'https://api.example.com/suran/beta-signup';
-
-
 document.addEventListener('DOMContentLoaded', () => {
   initHeaderOffset();
   initScrollReveal();
@@ -39,6 +30,29 @@ document.addEventListener('DOMContentLoaded', () => {
  */
 function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+/**
+ * Ritarda l'esecuzione di "fn" finché non passano "delay" ms senza nuove
+ * chiamate. Usato per evitare di rieseguire calcoli costosi (letture di
+ * layout, scritture di stile) ad ogni singolo evento durante un resize.
+ */
+function debounce(fn, delay = 150) {
+  let timeoutId;
+  return (...args) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => fn(...args), delay);
+  };
+}
+
+/**
+ * Punto unico da collegare a un vero strumento di analytics (Plausible,
+ * GA4, ecc.) quando ne verrà scelto uno. Oggi si limita a un log in
+ * console, così l'evento di conversione più importante della pagina
+ * (candidatura inviata con successo) ha già un aggancio pronto.
+ */
+function trackEvent(name, data) {
+  console.info(`[SURAN] evento: ${name}`, data);
 }
 
 
@@ -64,8 +78,10 @@ function initHeaderOffset() {
   };
 
   applyOffset();
-  // Ricalcola se l'header cambia altezza (es. rotazione dispositivo)
-  window.addEventListener('resize', applyOffset);
+  // Ricalcola se l'header cambia altezza (es. rotazione dispositivo).
+  // Debounced: senza questo, ogni singolo pixel di resize rilancerebbe
+  // una lettura di layout + scrittura di stile su ogni sezione.
+  window.addEventListener('resize', debounce(applyOffset, 150));
 }
 
 
@@ -97,13 +113,25 @@ function initScrollReveal() {
   const revealEls = document.querySelectorAll(revealSelectors.join(', '));
   if (revealEls.length === 0) return;
 
-  // Se l'utente preferisce animazioni ridotte, mostriamo tutto subito,
-  // senza applicare transizioni.
-  if (prefersReducedMotion()) {
+  const showImmediately = () => {
     revealEls.forEach((el) => {
       el.style.opacity = '1';
       el.style.transform = 'none';
     });
+  };
+
+  // Se l'utente preferisce animazioni ridotte, mostriamo tutto subito,
+  // senza applicare transizioni.
+  if (prefersReducedMotion()) {
+    showImmediately();
+    return;
+  }
+
+  // Fallback di progressive enhancement: se il browser non supporta
+  // IntersectionObserver, mostriamo subito il contenuto invece di
+  // lasciarlo invisibile per sempre (l'observer non partirebbe mai).
+  if (!('IntersectionObserver' in window)) {
+    showImmediately();
     return;
   }
 
@@ -473,9 +501,6 @@ function initFormValidation() {
     const errorEl = document.createElement('p');
     errorEl.className = 'form__error';
     errorEl.id = `${name}-error`;
-    errorEl.style.color = 'var(--color-error, #B5533C)';
-    errorEl.style.fontSize = '0.8125rem';
-    errorEl.style.marginTop = '0.4rem';
     errorEl.setAttribute('role', 'alert');
     errorEl.hidden = true;
 
@@ -513,7 +538,7 @@ function initFormValidation() {
       firstInvalidField.focus();
       if (feedbackEl) {
         feedbackEl.textContent = 'Controlla i campi evidenziati e riprova.';
-        feedbackEl.style.color = 'var(--color-error, #B5533C)';
+        feedbackEl.classList.add('form__feedback--error');
       }
       return;
     }
@@ -523,7 +548,6 @@ function initFormValidation() {
 
   function setFieldInvalid(field) {
     field.el.setAttribute('aria-invalid', 'true');
-    field.el.style.borderColor = 'var(--color-error, #B5533C)';
     if (field.errorEl) {
       field.errorEl.textContent = field.message;
       field.errorEl.hidden = false;
@@ -532,7 +556,6 @@ function initFormValidation() {
 
   function setFieldValid(field) {
     field.el.setAttribute('aria-invalid', 'false');
-    field.el.style.borderColor = '';
     if (field.errorEl) {
       field.errorEl.hidden = true;
     }
@@ -540,23 +563,16 @@ function initFormValidation() {
 }
 
 /**
- * Invia la candidatura al backend di raccolta lead.
+ * Invia la candidatura al servizio configurato nell'attributo "action"
+ * del form (Formspree — vedi index.html). Usare "form.action" invece di
+ * una costante separata evita di avere due fonti di verità per lo stesso
+ * URL: chi deve cambiare l'endpoint tocca solo l'HTML.
  *
  * FIX CRITICO: prima di questa versione l'invio era simulato con un
  * setTimeout e nessun dato veniva realmente salvato da nessuna parte.
- *
- * ATTENZIONE: FORM_ENDPOINT è un placeholder — sostituirlo con l'URL
- * reale del servizio scelto (backend proprietario, Airtable, Formspree,
- * Supabase, ecc.) prima del rilascio in produzione.
  */
 async function submitForm(form, fields, feedbackEl, submitBtn) {
-  const payload = {
-    nome: fields.nome.el ? fields.nome.el.value.trim() : '',
-    email: fields.email.el ? fields.email.el.value.trim() : '',
-    modello: fields.modello.el ? fields.modello.el.value.trim() : '',
-    inutilizzo: fields.inutilizzo.el ? fields.inutilizzo.el.value.trim() : '',
-    motivazione: fields.motivazione.el ? fields.motivazione.el.value.trim() : '',
-  };
+  const nomeValue = fields.nome.el ? fields.nome.el.value.trim() : '';
 
   // Stato di caricamento: disabilita il pulsante e comunica l'attesa
   if (submitBtn) {
@@ -566,24 +582,41 @@ async function submitForm(form, fields, feedbackEl, submitBtn) {
   }
   if (feedbackEl) {
     feedbackEl.textContent = '';
-    feedbackEl.style.color = '';
+    feedbackEl.classList.remove('form__feedback--error');
   }
 
   try {
-    const response = await fetch(FORM_ENDPOINT, {
+    // FormData raccoglie automaticamente tutti i campi del form, inclusi
+    // l'honeypot "_gotcha" e il campo nascosto "_subject" — non serve
+    // ricostruire manualmente un oggetto payload da tenere sincronizzato
+    // ogni volta che si aggiunge/rimuove un campo.
+    const formData = new FormData(form);
+
+    const response = await fetch(form.action, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
+      body: formData,
+      // Richiesto da Formspree per rispondere in JSON invece di
+      // reindirizzare la pagina, così possiamo gestire la risposta via JS.
+      headers: { Accept: 'application/json' },
     });
 
     if (!response.ok) {
-      throw new Error(`Il server ha risposto con stato ${response.status}`);
+      // Formspree restituisce un body JSON con eventuali errori di
+      // validazione lato server (es. campo email mancante/non valido).
+      const data = await response.json().catch(() => null);
+      const serverMessage =
+        data && Array.isArray(data.errors) && data.errors.length > 0
+          ? data.errors.map((err) => err.message).join(' ')
+          : null;
+      throw new Error(serverMessage || `Il server ha risposto con stato ${response.status}`);
     }
 
-    showConfirmation(form, payload.nome);
+    trackEvent('beta_signup_submitted', { hasOptionalDetails: Boolean(fields.inutilizzo.el?.value || fields.motivazione.el?.value) });
+    showConfirmation(form, nomeValue);
   } catch (error) {
-    // Errore di rete o risposta non valida: l'utente resta sul form,
-    // con i dati già inseriti intatti, e viene invitato a riprovare.
+    // Errore di rete, endpoint non configurato, o rifiuto del server:
+    // l'utente resta sul form, con i dati già inseriti intatti, e viene
+    // invitato a riprovare.
     console.error('Invio candidatura fallito:', error);
 
     if (submitBtn) {
@@ -592,7 +625,7 @@ async function submitForm(form, fields, feedbackEl, submitBtn) {
     }
     if (feedbackEl) {
       feedbackEl.textContent = 'Non siamo riusciti a inviare la candidatura. Controlla la connessione e riprova.';
-      feedbackEl.style.color = 'var(--color-error, #B5533C)';
+      feedbackEl.classList.add('form__feedback--error');
     }
   }
 }
