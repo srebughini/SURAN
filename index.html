@@ -7,30 +7,28 @@
   <meta name="description" content="SURAN ridà vita agli smartphone Android che possiedi già, trasformandoli in dispositivi semplici, veloci ed essenziali. Candidati al Programma Beta.">
 
   <!-- SEO: URL canonica e direttive per i motori di ricerca.
-       NOTA: sostituire "https://www.suran.it/" con il dominio reale non appena disponibile. -->
-  <link rel="canonical" href="https://www.suran.it/">
+       NOTA: sostituire "https://suran.ste-rebu.workers.dev/" con il dominio reale non appena disponibile. -->
+  <link rel="canonical" href="https://suran.ste-rebu.workers.dev/">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#F7F5F1">
 
   <!-- Favicon: derivata dal logo SVG del brand -->
   <link rel="icon" href="logo.svg" type="image/svg+xml">
 
-  <!-- Open Graph: anteprima su Facebook, LinkedIn, WhatsApp, ecc.
-       NOTA: "og:image" è un placeholder — sostituire con un asset reale 1200×630px
-       prima del lancio (un'immagine SVG non è affidabile per le anteprime social). -->
+  <!-- Open Graph: anteprima su Facebook, LinkedIn, WhatsApp, ecc. -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="SURAN">
   <meta property="og:locale" content="it_IT">
-  <meta property="og:url" content="https://www.suran.it/">
+  <meta property="og:url" content="https://suran.ste-rebu.workers.dev/">
   <meta property="og:title" content="SURAN — Una seconda vita per il telefono che hai già">
   <meta property="og:description" content="SURAN ridà vita agli smartphone Android che possiedi già, trasformandoli in dispositivi semplici, veloci ed essenziali. Candidati al Programma Beta.">
-  <meta property="og:image" content="https://www.suran.it/assets/og-image.jpg">
+  <meta property="og:image" content="https://suran.ste-rebu.workers.dev/assets/og-image.jpg">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="SURAN — Una seconda vita per il telefono che hai già">
   <meta name="twitter:description" content="SURAN ridà vita agli smartphone Android che possiedi già, trasformandoli in dispositivi semplici, veloci ed essenziali.">
-  <meta name="twitter:image" content="https://www.suran.it/assets/og-image.jpg">
+  <meta name="twitter:image" content="https://suran.ste-rebu.workers.dev/assets/og-image.jpg">
 
   <!-- Dati strutturati schema.org: aiutano i motori di ricerca a riconoscere SURAN come organizzazione -->
   <script type="application/ld+json">
@@ -38,8 +36,8 @@
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "SURAN",
-    "url": "https://www.suran.it/",
-    "logo": "https://www.suran.it/logo.svg",
+    "url": "https://suran.ste-rebu.workers.dev/",
+    "logo": "https://suran.ste-rebu.workers.dev/logo.svg",
     "description": "SURAN ridà vita agli smartphone Android inutilizzati, trasformandoli in dispositivi semplici, veloci ed essenziali."
   }
   </script>
@@ -128,29 +126,29 @@
         </div>
 
         <!-- ============================================================
-             VISUAL HERO — DA SOSTITUIRE CON FOTOGRAFIA DI PRODOTTO REALE
+             VISUAL HERO — fotografia di prodotto
              ============================================================
-             Rimossa l'illustrazione tecnica precedente (vista esplosa,
-             glow, particelle): comunicava "startup hardware/AI", non
-             "servizio di cura per il telefono che hai già". Vedi la
-             risposta con la direzione creativa completa per il brief
-             fotografico esteso.
-
-             Questo blocco è un PLACEHOLDER STRUTTURALE: riproduce le
-             proporzioni e la composizione finali (sfondo #FAFAF8, telefono
-             a ~40% della larghezza, ampio spazio negativo, ombra leggera)
-             così che la sezione sia pronta per ricevere lo scatto reale
-             senza ulteriori modifiche di layout — ma non è, e non vuole
-             sembrare, l'asset finale.
-
-             Per sostituirlo con la foto reale: rimuovi .hero__media-phone
-             e il suo contenitore, e inserisci un tag <img> con la
-             fotografia, mantenendo .hero__media come contenitore (già
-             impostato con lo sfondo e lo spazio corretti). -->
-        <figure class="hero__media" aria-hidden="true">
-          <div class="hero__media-frame">
-            <div class="hero__media-phone"></div>
-          </div>
+             Foto generata su specifica creativa, seconda iterazione:
+             stessa inquadratura e schermo a riposo della prima versione,
+             con l'aggiunta di segni di usura molto sottili sulla cornice
+             (richiesti esplicitamente per evitare l'effetto "telefono
+             nuovo di zecca"). <picture> serve WebP quando supportato,
+             JPEG come fallback. width/height reali (768×1024 — ritaglio
+             verticale, non più 3:2) prevengono il Cumulative Layout
+             Shift; fetchpriority="high" segnala che è probabilmente
+             l'elemento LCP della pagina. -->
+        <figure class="hero__media">
+          <picture>
+            <source srcset="assets/hero-phone.webp" type="image/webp">
+            <img
+              src="assets/hero-phone.jpg"
+              alt="Uno smartphone Android con segni di usura sottili sulla cornice, appoggiato su una superficie neutra chiara, schermo acceso con orologio e data su sfondo scuro essenziale, luce naturale morbida"
+              width="768"
+              height="1024"
+              fetchpriority="high"
+              loading="eager"
+            >
+          </picture>
         </figure>
       </div>
     </section>
@@ -408,7 +406,7 @@
         <form
           id="form-candidatura"
           class="form"
-          action="https://formspree.io/f/YOUR_FORM_ID"
+          action="https://formspree.io/f/mwvgqled"
           method="POST"
           novalidate
         >
@@ -506,11 +504,10 @@
 
       <p class="site-footer__tagline">SURAN — Una seconda vita per il telefono che hai già.</p>
 
-      <!-- "Contatti" e "Privacy" puntano a destinazioni reali (non più href="#"):
-           /privacy va creata come pagina vera prima del lancio. -->
+      <!-- "Contatti" e "Privacy" puntano a destinazioni reali. -->
       <nav class="site-footer__links" aria-label="Link secondari del footer">
-        <a href="mailto:ciao@suran.it">Contatti</a>
-        <a href="/privacy">Privacy</a>
+        <a href="mailto:ste.rebu@outlook.it">Contatti</a>
+        <a href="privacy.html">Privacy</a>
         <a href="#programma-beta">Programma Beta</a>
       </nav>
     </div>
