@@ -377,7 +377,7 @@
 
           <details class="faq-item">
             <summary class="faq-item__question">Cosa succede dopo che mi candido?</summary>
-            <p class="faq-item__answer">Ti contatteremo direttamente, appena il tuo profilo corrisponde alla prossima fase del Beta. Nessuna attesa anonima: una risposta vera, da persone vere.</p>
+            <p class="faq-item__answer">Ti contatteremo direttamente nei prossimi giorni. Nessuna attesa anonima: una risposta vera, da persone vere.</p>
           </details>
         </div>
       </div>
@@ -388,10 +388,8 @@
          CTA primaria della pagina. Campi minimi per ridurre l'attrito,
          label sempre visibili (mai solo placeholder) per accessibilità.
 
-         FORMSPREE: l'attributo action punta all'endpoint Formspree —
-         sostituisci "YOUR_FORM_ID" con l'ID reale creato su
-         https://formspree.io (Dashboard → New Form → copia l'URL
-         "https://formspree.io/f/xxxxxxx"). Grazie a questo attributo il
+         FORMSPREE: l'attributo action punta all'endpoint Formspree reale
+         del progetto (creato su https://formspree.io). Grazie a questo
          form funziona anche se JavaScript non si carica: il browser
          esegue comunque un invio POST nativo direttamente a Formspree
          (progressive enhancement). Quando JavaScript è disponibile,
@@ -515,6 +513,13 @@
 
   <!-- Script principale: gestisce invio form, animazioni scroll-triggered e interazioni -->
   <script src="script.js" defer></script>
+
+  <!-- Cloudflare Web Analytics: gratuito, senza cookie, nessun consenso
+       GDPR richiesto — coerente con quanto dichiarato in privacy.html.
+       Misura solo pagine viste/visitatori, non eventi personalizzati:
+       per il tasso di conversione, incrocia questo dato con il numero
+       di candidature ricevute su Formspree. -->
+  <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "49f041aa01544f6c89724cd6155f1c4b"}'></script>
 
 </body>
 </html>

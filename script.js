@@ -657,7 +657,7 @@ function showConfirmation(form, nomeValue) {
   text.className = 'form-confirmation__text';
   text.textContent =
     'La tua candidatura al Programma Beta è stata inviata. Ti risponderemo ' +
-    'di persona non appena il tuo profilo corrisponde alla prossima ondata.';
+    'di persona nei prossimi giorni.';
 
   confirmation.append(title, text);
 
