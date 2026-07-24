@@ -128,13 +128,13 @@
         <!-- ============================================================
              VISUAL HERO — fotografia di prodotto
              ============================================================
-             Foto generata su specifica creativa, seconda iterazione:
-             stessa inquadratura e schermo a riposo della prima versione,
-             con l'aggiunta di segni di usura molto sottili sulla cornice
-             (richiesti esplicitamente per evitare l'effetto "telefono
-             nuovo di zecca"). <picture> serve WebP quando supportato,
-             JPEG come fallback. width/height reali (768×1024 — ritaglio
-             verticale, non più 3:2) prevengono il Cumulative Layout
+             Quarta iterazione: rimosso lo spazio vuoto in eccesso in
+             fondo al file (109px su 742, già puro colore di sfondo dopo
+             la sfumatura dei bordi — misurato, non stimato). Era la vera
+             causa del distacco percepito tra CTA e foto: il margine CSS
+             era già minimo, il "vuoto" era dentro il file immagine.
+             <picture> serve WebP quando supportato, JPEG come fallback.
+             width/height reali (702×650) prevengono il Cumulative Layout
              Shift; fetchpriority="high" segnala che è probabilmente
              l'elemento LCP della pagina. -->
         <figure class="hero__media">
@@ -143,8 +143,8 @@
             <img
               src="assets/hero-phone.jpg"
               alt="Uno smartphone Android con segni di usura sottili sulla cornice, appoggiato su una superficie neutra chiara, schermo acceso con orologio e data su sfondo scuro essenziale, luce naturale morbida"
-              width="768"
-              height="1024"
+              width="702"
+              height="650"
               fetchpriority="high"
               loading="eager"
             >

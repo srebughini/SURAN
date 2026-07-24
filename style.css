@@ -462,53 +462,31 @@ p {
 }
 
 .hero__cta {
-  margin-bottom: var(--space-8); /* più respiro prima del visual (fix hero) */
+  margin-bottom: var(--space-4); /* ridotto: la foto deve leggersi collegata alla CTA, non separata */
 }
 
 .hero__cta-note {
   margin-top: var(--space-2);
 }
 
-/* Area fotografica della hero. #FAFAF8 è intenzionalmente diverso da
-   --color-bg (#F7F5F1): qui rappresenta il fondale dello scatto prodotto,
-   non un colore di sistema — resta scoped a questo contenitore, il resto
-   della palette del Design System non cambia. Molto spazio negativo,
-   ombra leggera invece della card piena usata in precedenza: la foto deve
-   respirare, non riempire il contenitore. */
+/* Area fotografica della hero: nessuno sfondo separato, nessuna ombra
+   CSS, nessun bordo — la foto (già sfumata verso il colore di sfondo
+   della pagina ai margini, così non mostra un bordo rettangolare netto)
+   sta semplicemente sulla pagina. Centrata con margin-inline:auto
+   direttamente su picture/img, non con flexbox: più prevedibile tra
+   browser diversi quando l'elemento centrato è un <picture>. */
 .hero__media {
-  background-color: #FAFAF8;
-  border-radius: var(--radius);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--space-8) var(--space-5);
-  min-height: 420px;
+  padding-top: 0;
+  padding-bottom: var(--space-4);
 }
 
+.hero__media picture,
 .hero__media img {
-  /* Quando la fotografia reale sostituirà il placeholder: il telefono
-     occupa ~40% della larghezza dell'area, mai a piena larghezza. */
-  width: 40%;
-  min-width: 220px;
+  display: block;
+  width: 78%;
+  max-width: 420px;
   height: auto;
-}
-
-/* --- Placeholder strutturale (da rimuovere quando arriva la foto reale) --- */
-.hero__media-frame {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
-.hero__media-phone {
-  width: 40%;
-  max-width: 220px;
-  aspect-ratio: 9 / 19.5;
-  background-color: var(--color-bg-alt);
-  border: 1px solid var(--color-border);
-  border-radius: 28px;
-  box-shadow: 0 24px 48px -20px rgba(26, 25, 24, 0.15); /* ombra molto leggera, non un box-shadow da card */
+  margin-inline: auto;
 }
 
 
@@ -971,8 +949,11 @@ summary:focus-visible {
   }
 
   .hero__media {
-    min-height: 560px;
-    padding: var(--space-9) var(--space-6);
+    padding-block: var(--space-8);
+  }
+
+  .hero__media img {
+    max-width: 520px;
   }
 
   .feature-grid {
