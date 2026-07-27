@@ -235,13 +235,30 @@ p {
    5. HEADER
 -------------------------------------------------------------------------- */
 
+/* FIX: niente background-color/backdrop-filter direttamente qui — vedi
+   ::before sotto. Nota tecnica: backdrop-filter (come transform e filter)
+   crea un nuovo "contenitore di riferimento" per i discendenti con
+   position:fixed. #mobile-menu è annidato dentro questo header: se il
+   blur fosse applicato qui, il pannello mobile a schermo intero si
+   ancorerebbe alla sola area dell'header invece che all'intero
+   viewport — esattamente il bug per cui il menu appariva compresso in
+   alto invece di coprire tutto lo schermo. Spostando blur e sfondo su
+   uno pseudo-elemento, l'header stesso resta "innocuo" per i figli con
+   position:fixed, con lo stesso identico risultato visivo. */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 10;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   background-color: rgba(247, 245, 241, 0.9);
   backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--color-border);
 }
 
 .site-header__inner {
