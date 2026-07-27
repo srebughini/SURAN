@@ -318,7 +318,14 @@ p {
 
 /* Pannello di navigazione: su mobile è un overlay a schermo intero,
    nascosto di default e mostrato tramite la classe "is-open"
-   (aggiunta/rimossa da script.js). */
+   (aggiunta/rimossa da script.js).
+
+   FIX: i link usavano font-size da titolo (var(--fs-h2), fino a 32px)
+   con un gap molto ampio (32px) e nessun overflow-y sul pannello. Su
+   schermi piccoli o in orientamento orizzontale il contenuto poteva
+   superare l'altezza della viewport, tagliando fuori link irraggiungibili
+   — nessuno scroll possibile per recuperarli. Corretto riducendo le
+   dimensioni e aggiungendo uno scroll di sicurezza. */
 .site-nav {
   position: fixed;
   inset: 0;
@@ -327,7 +334,9 @@ p {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: var(--space-5);
+  gap: var(--space-4);
+  padding: var(--space-8) var(--space-4) var(--space-4);
+  overflow-y: auto;
   background-color: var(--color-bg);
   transform: translateY(-8px);
   opacity: 0;
@@ -344,7 +353,7 @@ p {
 }
 
 .site-nav__link {
-  font-size: var(--fs-h2);
+  font-size: var(--fs-body-lg);
   font-weight: 600;
   letter-spacing: var(--tracking-tight);
   color: var(--color-text);
@@ -911,6 +920,8 @@ summary:focus-visible {
     flex-direction: row;
     align-items: center;
     gap: var(--space-5);
+    padding: 0;
+    overflow-y: visible;
     background-color: transparent;
     transform: none;
     opacity: 1;
