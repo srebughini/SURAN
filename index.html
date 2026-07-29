@@ -6,19 +6,29 @@
   <title>SURAN — Una seconda vita per il telefono che hai già</title>
   <meta name="description" content="SURAN ridà vita agli smartphone Android che possiedi già, trasformandoli in dispositivi semplici, veloci ed essenziali. Candidati al Programma Beta.">
 
-  <!-- SEO: URL canonica e direttive per i motori di ricerca.
-       NOTA: sostituire "https://suran.tech/" con il dominio reale non appena disponibile. -->
+  <!-- SEO: URL canonica e direttive per i motori di ricerca. -->
   <link rel="canonical" href="https://suran.tech/">
+  <link rel="alternate" hreflang="it" href="https://suran.tech/">
+  <link rel="alternate" hreflang="en" href="https://suran.tech/en.html">
+  <link rel="alternate" hreflang="x-default" href="https://suran.tech/">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#F7F5F1">
 
-  <!-- Favicon: derivata dal logo SVG del brand -->
+  <!-- Favicon: SVG come formato primario (nitido a qualunque dimensione),
+       con fallback raster per contesti/browser che non supportano le
+       favicon SVG (alcuni crawler, Safari meno recenti) e per la home
+       screen iOS. -->
   <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="favicon-16.png" sizes="16x16" type="image/png">
+  <link rel="alternate icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
   <!-- Open Graph: anteprima su Facebook, LinkedIn, WhatsApp, ecc. -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="SURAN">
   <meta property="og:locale" content="it_IT">
+  <meta property="og:locale:alternate" content="en_US">
   <meta property="og:url" content="https://suran.tech/">
   <meta property="og:title" content="SURAN — Una seconda vita per il telefono che hai già">
   <meta property="og:description" content="SURAN ridà vita agli smartphone Android che possiedi già, trasformandoli in dispositivi semplici, veloci ed essenziali. Candidati al Programma Beta.">
@@ -30,15 +40,31 @@
   <meta name="twitter:description" content="SURAN ridà vita agli smartphone Android che possiedi già, trasformandoli in dispositivi semplici, veloci ed essenziali.">
   <meta name="twitter:image" content="https://suran.tech/assets/og-image.jpg">
 
-  <!-- Dati strutturati schema.org: aiutano i motori di ricerca a riconoscere SURAN come organizzazione -->
+  <!-- Dati strutturati schema.org: Organization + WebSite collegati tramite
+       @graph. L'URL dell'Organization resta sempre il dominio principale
+       (non varia tra le due lingue): è la stessa identità sulle due
+       versioni, non due organizzazioni diverse. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "SURAN",
-    "url": "https://suran.tech/",
-    "logo": "https://suran.tech/logo.svg",
-    "description": "SURAN ridà vita agli smartphone Android inutilizzati, trasformandoli in dispositivi semplici, veloci ed essenziali."
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://suran.tech/#organization",
+        "name": "SURAN",
+        "url": "https://suran.tech/",
+        "logo": "https://suran.tech/logo.svg",
+        "description": "SURAN ridà vita agli smartphone Android inutilizzati, trasformandoli in dispositivi semplici, veloci ed essenziali."
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://suran.tech/#website",
+        "name": "SURAN",
+        "url": "https://suran.tech/",
+        "inLanguage": ["it", "en"],
+        "publisher": { "@id": "https://suran.tech/#organization" }
+      }
+    ]
   }
   </script>
 
@@ -69,6 +95,13 @@
         </svg>
         <span class="logo__wordmark">SURAN</span>
       </a>
+
+      <!-- Selettore di lingua: controllo piccolo e permanente — non
+           deve mai competere visivamente con la CTA principale. -->
+      <div class="lang-switch" aria-label="Selettore lingua">
+        <span class="lang-switch__current" aria-current="page">IT</span>
+        <a href="en.html" class="lang-switch__link" hreflang="en" lang="en">EN</a>
+      </div>
 
       <!-- Pulsante hamburger: visibile solo su mobile (via CSS).
            aria-expanded viene aggiornato da script.js in base allo stato del menu. -->
@@ -117,8 +150,8 @@
           È solo appesantito.
         </h1>
         <p class="hero__subtitle">
-          SURAN dà nuova vita agli smartphone Android che possiedi già.
-          Più veloci. Più semplici. Più tuoi.
+          Ridiamo vita al telefono che hai già. Più semplice, più veloce,
+          senza costringerti a comprarne uno nuovo.
         </p>
         <div class="hero__cta">
           <a href="#candidatura" class="btn btn--primary">Candidati al Programma Beta</a>
@@ -150,6 +183,56 @@
             >
           </picture>
         </figure>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PERCHÉ SURAN — chiarimento di posizionamento
+         Inserita subito dopo la Hero: risponde a "perché SURAN invece
+         di comprare un altro telefono" prima ancora che l'utente se lo
+         chieda. Riusa griglia, tipografia e spaziature del Design
+         System — nessun elemento grafico nuovo, solo icone lineari
+         coerenti con quelle già usate in "Come funziona".
+    ============================================================= -->
+    <section id="perche-suran" class="section" aria-labelledby="perche-suran-title">
+      <div class="container container--narrow">
+        <h2 id="perche-suran-title" class="section__title section__title--center">Perché Suran?</h2>
+        <p class="section__text section__text--center" style="margin-bottom: var(--space-6);">
+          Il telefono che hai già può diventare esattamente quello di cui hai bisogno.
+        </p>
+      </div>
+
+      <div class="container">
+        <div class="why-grid">
+          <article class="why-card">
+            <svg class="why-card__icon" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="7" y="2" width="10" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M10.5 19h3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <h3 class="why-card__title">Il tuo telefono, non uno nuovo</h3>
+            <p class="why-card__text">Usiamo il dispositivo che possiedi già. Lo rendiamo più semplice, veloce e piacevole da utilizzare, senza costringerti a cambiarlo.</p>
+          </article>
+
+          <article class="why-card">
+            <svg class="why-card__icon" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3.5" y="3.5" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="13.5" y="3.5" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="3.5" y="13.5" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="13.5" y="13.5" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+            <h3 class="why-card__title">Solo ciò che serve</h3>
+            <p class="why-card__text">WhatsApp, Telegram, chiamate, messaggi, mappe e poche altre funzioni essenziali. Meno distrazioni, più semplicità.</p>
+          </article>
+
+          <article class="why-card">
+            <svg class="why-card__icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M18.4 8A8 8 0 1 1 12 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M18.4 3.5V8h-4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h3 class="why-card__title">Una seconda vita, senza sprechi</h3>
+            <p class="why-card__text">Allungare la vita di uno smartphone significa valorizzare un dispositivo che può ancora fare molto, evitando sostituzioni inutili.</p>
+          </article>
+        </div>
       </div>
     </section>
 

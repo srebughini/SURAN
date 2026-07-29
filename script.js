@@ -33,6 +33,44 @@ function prefersReducedMotion() {
 }
 
 /**
+ * Le uniche stringhe generate via JavaScript (messaggi di validazione,
+ * stato di invio, conferma) vivono qui, non sparse nel codice. Copy e
+ * struttura HTML restano invece nei rispettivi index.html/en.html — un
+ * solo script.js condiviso tra le due lingue, la lingua si rileva
+ * dall'attributo lang della pagina che lo carica.
+ */
+const LANG = document.documentElement.lang === 'en' ? 'en' : 'it';
+
+const STRINGS = {
+  it: {
+    nomeError: 'Inserisci il tuo nome (almeno 2 caratteri).',
+    emailError: 'Inserisci un indirizzo email valido.',
+    formInvalid: 'Controlla i campi evidenziati e riprova.',
+    sending: 'Invio in corso…',
+    sendErrorFallback: 'Invia la candidatura',
+    sendError: 'Non siamo riusciti a inviare la candidatura. Controlla la connessione e riprova.',
+    thanks: (name) => (name ? `Grazie, ${name}.` : 'Grazie.'),
+    confirmText:
+      'La tua candidatura al Programma Beta è stata inviata. Ti risponderemo ' +
+      'di persona nei prossimi giorni.',
+  },
+  en: {
+    nomeError: 'Enter your name (at least 2 characters).',
+    emailError: 'Enter a valid email address.',
+    formInvalid: 'Please check the highlighted fields and try again.',
+    sending: 'Sending…',
+    sendErrorFallback: 'Send application',
+    sendError: "We couldn't send your application. Check your connection and try again.",
+    thanks: (name) => (name ? `Thanks, ${name}.` : 'Thanks.'),
+    confirmText:
+      "Your Beta Program application has been sent. We'll get back to " +
+      'you personally within the next few days.',
+  },
+};
+
+const T = STRINGS[LANG];
+
+/**
  * Ritarda l'esecuzione di "fn" finché non passano "delay" ms senza nuove
  * chiamate. Usato per evitare di rieseguire calcoli costosi (letture di
  * layout, scritture di stile) ad ogni singolo evento durante un resize.
@@ -468,14 +506,14 @@ function initFormValidation() {
       el: form.querySelector('#nome'),
       required: true,
       validate: (value) => value.trim().length >= 2,
-      message: 'Inserisci il tuo nome (almeno 2 caratteri).',
+      message: T.nomeError,
     },
     email: {
       el: form.querySelector('#email'),
       required: true,
       // Pattern semplice, sufficiente per una validazione client-side onesta
       validate: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim()),
-      message: 'Inserisci un indirizzo email valido.',
+      message: T.emailError,
     },
     modello: {
       el: form.querySelector('#modello'),
@@ -537,7 +575,7 @@ function initFormValidation() {
       // Porta l'attenzione (visiva e per screen reader) sul primo campo non valido
       firstInvalidField.focus();
       if (feedbackEl) {
-        feedbackEl.textContent = 'Controlla i campi evidenziati e riprova.';
+        feedbackEl.textContent = T.formInvalid;
         feedbackEl.classList.add('form__feedback--error');
       }
       return;
@@ -578,7 +616,7 @@ async function submitForm(form, fields, feedbackEl, submitBtn) {
   if (submitBtn) {
     submitBtn.disabled = true;
     submitBtn.dataset.originalText = submitBtn.dataset.originalText || submitBtn.textContent;
-    submitBtn.textContent = 'Invio in corso…';
+    submitBtn.textContent = T.sending;
   }
   if (feedbackEl) {
     feedbackEl.textContent = '';
@@ -621,10 +659,10 @@ async function submitForm(form, fields, feedbackEl, submitBtn) {
 
     if (submitBtn) {
       submitBtn.disabled = false;
-      submitBtn.textContent = submitBtn.dataset.originalText || 'Invia la candidatura';
+      submitBtn.textContent = submitBtn.dataset.originalText || T.sendErrorFallback;
     }
     if (feedbackEl) {
-      feedbackEl.textContent = 'Non siamo riusciti a inviare la candidatura. Controlla la connessione e riprova.';
+      feedbackEl.textContent = T.sendError;
       feedbackEl.classList.add('form__feedback--error');
     }
   }
@@ -651,13 +689,11 @@ function showConfirmation(form, nomeValue) {
 
   const title = document.createElement('h3');
   title.className = 'form-confirmation__title';
-  title.textContent = nomeValue ? `Grazie, ${nomeValue}.` : 'Grazie.';
+  title.textContent = T.thanks(nomeValue);
 
   const text = document.createElement('p');
   text.className = 'form-confirmation__text';
-  text.textContent =
-    'La tua candidatura al Programma Beta è stata inviata. Ti risponderemo ' +
-    'di persona nei prossimi giorni.';
+  text.textContent = T.confirmText;
 
   confirmation.append(title, text);
 

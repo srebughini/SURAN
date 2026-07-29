@@ -264,7 +264,6 @@ p {
 .site-header__inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding-block: var(--space-3);
 }
 
@@ -285,6 +284,35 @@ p {
   font-size: var(--fs-body-lg);
   font-weight: 700;
   letter-spacing: var(--tracking-tight);
+}
+
+/* Selettore di lingua: controllo piccolo e permanente, mai in
+   competizione visiva con la CTA. Posizionato tra logo e hamburger su
+   mobile; su desktop resta comunque a fianco della nav (vedi sezione
+   16 responsive: non richiede una regola dedicata perché segue il
+   flusso naturale di .site-header__inner). */
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin-left: auto;
+  margin-right: var(--space-3);
+}
+
+.lang-switch__current {
+  color: var(--color-text);
+}
+
+.lang-switch__link {
+  color: var(--color-text-secondary);
+  transition: color var(--transition-fast);
+}
+
+.lang-switch__link:hover {
+  color: var(--color-accent);
 }
 
 
@@ -621,6 +649,54 @@ p {
 
 
 /* --------------------------------------------------------------------------
+   10.1 PERCHÉ SURAN — card grid
+   Stessa griglia responsive di .feature-grid (1 colonna mobile, 2
+   tablet, 3 desktop). Bordo sottile invece dell'ombra usata dalle
+   feature card più in basso nella pagina — coerente con la richiesta
+   "bordi sottili" per questa sezione specifica — con un hover molto
+   discreto (leggero sollevamento + bordo che vira verso l'accento,
+   niente ombre pesanti o glow).
+-------------------------------------------------------------------------- */
+
+.why-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+.why-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-5);
+  transition: transform var(--transition-base), border-color var(--transition-fast);
+}
+
+.why-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-accent);
+}
+
+.why-card__icon {
+  display: block;
+  width: 28px;
+  height: 28px;
+  color: var(--color-accent);
+  margin-bottom: var(--space-3);
+}
+
+.why-card__title {
+  font-size: var(--fs-body-lg);
+  margin-bottom: var(--space-2);
+}
+
+.why-card__text {
+  color: var(--color-text-secondary);
+  font-size: var(--fs-small);
+}
+
+
+/* --------------------------------------------------------------------------
    11. FORM DI CANDIDATURA
 -------------------------------------------------------------------------- */
 
@@ -917,6 +993,10 @@ summary:focus-visible {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .why-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .site-footer__message {
     max-width: 48ch;
   }
@@ -985,6 +1065,10 @@ summary:focus-visible {
   }
 
   .feature-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .why-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 

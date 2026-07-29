@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SURAN — A second life for the phone you already have</title>
+  <meta name="description" content="SURAN brings the Android smartphone you already own back to life, turning it into a simple, fast, essential device. Apply to the Beta Program.">
+
+  <!-- SEO: canonical URL + hreflang alternates for the Italian version -->
+  <link rel="canonical" href="https://suran.tech/en.html">
+  <link rel="alternate" hreflang="it" href="https://suran.tech/">
+  <link rel="alternate" hreflang="en" href="https://suran.tech/en.html">
+  <link rel="alternate" hreflang="x-default" href="https://suran.tech/">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#F7F5F1">
+
+  <!-- Favicon: SVG as the primary format, with raster fallbacks for
+       contexts/browsers without SVG favicon support, and for iOS
+       home screen bookmarks. -->
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="favicon-16.png" sizes="16x16" type="image/png">
+  <link rel="alternate icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="SURAN">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="it_IT">
+  <meta property="og:url" content="https://suran.tech/en.html">
+  <meta property="og:title" content="SURAN — A second life for the phone you already have">
+  <meta property="og:description" content="SURAN brings the Android smartphone you already own back to life, turning it into a simple, fast, essential device. Apply to the Beta Program.">
+  <meta property="og:image" content="https://suran.tech/assets/og-image-en.jpg">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SURAN — A second life for the phone you already have">
+  <meta name="twitter:description" content="SURAN brings the Android smartphone you already own back to life, turning it into a simple, fast, essential device.">
+  <meta name="twitter:image" content="https://suran.tech/assets/og-image-en.jpg">
+
+  <!-- schema.org structured data: same Organization @id as the Italian
+       page — one entity, not two. WebSite added via @graph. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://suran.tech/#organization",
+        "name": "SURAN",
+        "url": "https://suran.tech/",
+        "logo": "https://suran.tech/logo.svg",
+        "description": "SURAN brings unused Android smartphones back to life, turning them into simple, fast, essential devices."
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://suran.tech/#website",
+        "name": "SURAN",
+        "url": "https://suran.tech/",
+        "inLanguage": ["it", "en"],
+        "publisher": { "@id": "https://suran.tech/#organization" }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Main stylesheet: shared with the Italian version, same Design System -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       HEADER / NAVIGATION
+  ============================================================= -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a href="#hero" class="logo" aria-label="SURAN — back to top">
+        <svg class="logo__mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <path d="M 50 15 A 19 19 0 0 1 50 53 A 16 16 0 0 0 50 85" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="logo__wordmark">SURAN</span>
+      </a>
+
+      <!-- Language switcher: small, persistent utility control — never
+           competes visually with the primary CTA. -->
+      <div class="lang-switch" aria-label="Language selector">
+        <span class="lang-switch__current" aria-current="page">EN</span>
+        <a href="index.html" class="lang-switch__link" hreflang="it" lang="it">IT</a>
+      </div>
+
+      <button
+        type="button"
+        id="mobile-menu-toggle"
+        class="mobile-menu-toggle"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Open navigation menu"
+      >
+        <span class="mobile-menu-toggle__bar" aria-hidden="true"></span>
+        <span class="mobile-menu-toggle__bar" aria-hidden="true"></span>
+        <span class="mobile-menu-toggle__bar" aria-hidden="true"></span>
+      </button>
+
+      <nav id="mobile-menu" class="site-nav" aria-label="Main navigation">
+        <button type="button" class="site-nav__close" id="mobile-menu-close" aria-label="Close navigation menu">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <a href="#how-it-works" class="site-nav__link">How it works</a>
+        <a href="#beta-program" class="site-nav__link">Beta Program</a>
+        <a href="#faq" class="site-nav__link">FAQ</a>
+        <a href="#apply" class="btn btn--primary btn--small">Apply to Beta</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============================================================
+         HERO
+    ============================================================= -->
+    <section id="hero" class="section hero" aria-labelledby="hero-title">
+      <div class="container hero__inner">
+        <h1 id="hero-title" class="hero__title">
+          Your phone isn't old.<br>
+          It's just weighed down.
+        </h1>
+        <p class="hero__subtitle">
+          Bring new life to the phone you already own. Simpler, faster,
+          without asking you to buy a new one.
+        </p>
+        <div class="hero__cta">
+          <a href="#apply" class="btn btn--primary">Apply to the Beta Program</a>
+          <p class="hero__cta-note">Limited spots. No cost.</p>
+        </div>
+
+        <!-- VISUAL HERO — same product photo used on the Italian version. -->
+        <figure class="hero__media">
+          <picture>
+            <source srcset="assets/hero-phone.webp" type="image/webp">
+            <img
+              src="assets/hero-phone.jpg"
+              alt="An Android smartphone with subtle wear marks on the frame, resting on a light neutral surface, screen on showing a clock and date on an essential dark background, soft natural light"
+              width="702"
+              height="650"
+              fetchpriority="high"
+              loading="eager"
+            >
+          </picture>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         WHY SURAN — positioning clarification
+         Placed right after the Hero: answers "why SURAN instead of
+         buying another phone" before the visitor even asks. Reuses
+         the Design System's grid, typography and spacing — no new
+         graphic elements, same icon language as "How it works".
+    ============================================================= -->
+    <section id="why-suran" class="section" aria-labelledby="why-suran-title">
+      <div class="container container--narrow">
+        <h2 id="why-suran-title" class="section__title section__title--center">Why Suran?</h2>
+        <p class="section__text section__text--center" style="margin-bottom: var(--space-6);">
+          The phone you already have can become exactly what you need.
+        </p>
+      </div>
+
+      <div class="container">
+        <div class="why-grid">
+          <article class="why-card">
+            <svg class="why-card__icon" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="7" y="2" width="10" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M10.5 19h3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <h3 class="why-card__title">Your phone, not a new one</h3>
+            <p class="why-card__text">We work with the device you already own. We make it simpler, faster and more pleasant to use, without forcing you to replace it.</p>
+          </article>
+
+          <article class="why-card">
+            <svg class="why-card__icon" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3.5" y="3.5" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="13.5" y="3.5" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="3.5" y="13.5" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="13.5" y="13.5" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+            <h3 class="why-card__title">Only what you need</h3>
+            <p class="why-card__text">WhatsApp, Telegram, calls, messages, maps and a few other essential functions. Fewer distractions, more simplicity.</p>
+          </article>
+
+          <article class="why-card">
+            <svg class="why-card__icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M18.4 8A8 8 0 1 1 12 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M18.4 3.5V8h-4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h3 class="why-card__title">A second life, without waste</h3>
+            <p class="why-card__text">Extending a smartphone's life means making the most of a device that can still do a lot, avoiding unnecessary replacements.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         THE PROBLEM
+    ============================================================= -->
+    <section id="problem" class="section section--alt" aria-labelledby="problem-title">
+      <div class="container container--narrow">
+        <h2 id="problem-title" class="section__title">There's a phone switched off in a drawer.</h2>
+        <p class="section__text">
+          It's not broken. It's not too old to use. It just became slow,
+          cluttered with apps you never open, with a battery that doesn't
+          make it to the evening.
+        </p>
+        <p class="section__text">
+          So you replaced it. Not because it stopped working — but because
+          no one ever showed you how to make it work well again.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         THE SOLUTION
+    ============================================================= -->
+    <section id="solution" class="section" aria-labelledby="solution-title">
+      <div class="container container--narrow">
+        <h2 id="solution-title" class="section__title">Not a new phone. Yours, again.</h2>
+        <p class="section__text">
+          SURAN works on the software of the device you already have. We
+          remove the excess. We eliminate the slowdowns. We rebuild the
+          experience around what matters: calling, writing, moving through
+          the world.
+        </p>
+        <p class="section__text">
+          The result isn't a different phone. It's the same phone, without
+          everything that was slowing it down.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         HOW IT WORKS
+    ============================================================= -->
+    <section id="how-it-works" class="section section--alt" aria-labelledby="how-it-works-title">
+      <div class="container">
+        <h2 id="how-it-works-title" class="section__title section__title--center">Three steps. Nothing else.</h2>
+
+        <ol class="steps">
+          <li class="step">
+            <svg class="step__icon" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="4" y="3" width="16" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M8 9h8M8 13h5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span class="step__number" aria-hidden="true">01</span>
+            <h3 class="step__title">Apply</h3>
+            <p class="step__text">Tell us what phone you have. It takes two minutes.</p>
+          </li>
+          <li class="step">
+            <svg class="step__icon" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M12 8v4l3 2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="step__number" aria-hidden="true">02</span>
+            <h3 class="step__title">We prepare your device</h3>
+            <p class="step__text">We guide you through every step, with your data always safe.</p>
+          </li>
+          <li class="step">
+            <svg class="step__icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 12a8 8 0 1 1 2.5 5.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M4 17v-4h4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="step__number" aria-hidden="true">03</span>
+            <h3 class="step__title">Start using it again</h3>
+            <p class="step__text">A lighter phone. A lighter mind.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         BEFORE / AFTER
+    ============================================================= -->
+    <section id="before-after" class="section" aria-labelledby="before-after-title">
+      <div class="container container--narrow">
+        <h2 id="before-after-title" class="section__title section__title--center">Same body. Different experience.</h2>
+
+        <table class="compare-table">
+          <caption class="visually-hidden">Comparison of the phone's user experience before and after SURAN</caption>
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Before</th>
+              <th scope="col">After SURAN</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">App launch</th>
+              <td>Slow, unpredictable</td>
+              <td>Instant</td>
+            </tr>
+            <tr>
+              <th scope="row">Battery</th>
+              <td>Doesn't make it to the evening</td>
+              <td>Lasts all day</td>
+            </tr>
+            <tr>
+              <th scope="row">Home screen</th>
+              <td>Crowded, chaotic</td>
+              <td>Essential, clear</td>
+            </tr>
+            <tr>
+              <th scope="row">Notifications</th>
+              <td>Constant, intrusive</td>
+              <td>Only the ones that matter</td>
+            </tr>
+            <tr>
+              <th scope="row">How it feels</th>
+              <td>Frustration</td>
+              <td>Calm</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="section__text section__text--muted">
+          No components changed. No body replaced.
+          Just everything that wasn't needed anymore, removed.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FEATURES
+    ============================================================= -->
+    <section id="features" class="section section--alt" aria-labelledby="features-title">
+      <div class="container">
+        <h2 id="features-title" class="section__title section__title--center">Fewer things. Done better.</h2>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <h3 class="feature-card__title">Speed, rediscovered</h3>
+            <p class="feature-card__text">Unnecessary apps and processes no longer slow down every tap. The phone responds the way it should, instantly.</p>
+          </article>
+
+          <article class="feature-card">
+            <h3 class="feature-card__title">Longer battery life</h3>
+            <p class="feature-card__text">Less running in the background, more hours of battery. The same body, a whole extra day.</p>
+          </article>
+
+          <article class="feature-card">
+            <h3 class="feature-card__title">An interface that breathes</h3>
+            <p class="feature-card__text">No crowded screens, no icon competing for your attention. Just what you actually use.</p>
+          </article>
+
+          <article class="feature-card">
+            <h3 class="feature-card__title">Fewer interruptions</h3>
+            <p class="feature-card__text">Notifications become a choice again, not a siege.</p>
+          </article>
+
+          <article class="feature-card">
+            <h3 class="feature-card__title">Your data, protected</h3>
+            <p class="feature-card__text">Every step is designed to respect what's yours, from start to finish.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         BETA PROGRAM
+    ============================================================= -->
+    <section id="beta-program" class="section" aria-labelledby="beta-title">
+      <div class="container container--narrow">
+        <h2 id="beta-title" class="section__title">We're building SURAN with the first people who believe in it.</h2>
+        <p class="section__text">
+          The Beta Program is free, and open to a limited number of
+          participants. In exchange for your time and honesty, you'll get
+          access to SURAN before anyone else — and a real role in what it
+          becomes.
+        </p>
+        <p class="section__text">
+          We're not offering you a finished product. We're asking you to
+          help us build the right one.
+        </p>
+        <a href="#apply" class="btn btn--primary">Apply to the Beta Program</a>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FAQ
+    ============================================================= -->
+    <section id="faq" class="section" aria-labelledby="faq-title">
+      <div class="container container--narrow">
+        <h2 id="faq-title" class="section__title section__title--center">Frequently asked questions</h2>
+
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary class="faq-item__question">Is my data safe?</summary>
+            <p class="faq-item__answer">Yes. Every step of the process is designed to protect your personal information. We only access what's necessary, and we guide you step by step before any changes.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-item__question">Which smartphones are supported?</summary>
+            <p class="faq-item__answer">We're finalizing the full list together with the first Beta participants. If you're unsure about your model, apply anyway — we'll let you know personally.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-item__question">How much does it cost to take part?</summary>
+            <p class="faq-item__answer">Nothing. The Beta Program is free. In exchange, we just ask for honest feedback on your experience.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-item__question">Do I need to be tech-savvy to take part?</summary>
+            <p class="faq-item__answer">No. We guide you through every step, in plain language, with no technical shortcuts.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-item__question">What happens after I apply?</summary>
+            <p class="faq-item__answer">We'll contact you directly within the next few days. No anonymous waiting — a real reply, from real people.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         APPLICATION FORM
+         FORMSPREE: same endpoint as the Italian version — Formspree
+         doesn't care about language. The "_subject" field is in
+         English so it's easy to tell at a glance which language a
+         lead came from.
+    ============================================================= -->
+    <section id="apply" class="section section--alt" aria-labelledby="apply-title">
+      <div class="container container--narrow">
+        <h2 id="apply-title" class="section__title section__title--center">Apply to the Beta Program</h2>
+        <p class="section__text section__text--center">It takes two minutes. We'll get back to you personally.</p>
+
+        <form
+          id="form-candidatura"
+          class="form"
+          action="https://formspree.io/f/mwvgqled"
+          method="POST"
+          novalidate
+        >
+          <input
+            type="text"
+            name="_gotcha"
+            style="display:none"
+            tabindex="-1"
+            autocomplete="off"
+            aria-hidden="true"
+          >
+
+          <input type="hidden" name="_subject" value="New Beta Program application — SURAN (EN)">
+
+          <div class="form__field">
+            <label for="nome">Name</label>
+            <input type="text" id="nome" name="nome" autocomplete="name" required>
+          </div>
+
+          <div class="form__field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" required>
+          </div>
+
+          <div class="form__field">
+            <label for="modello">Smartphone model</label>
+            <input type="text" id="modello" name="modello" placeholder="E.g. Samsung Galaxy S9, or “not sure”">
+          </div>
+
+          <details class="form__more">
+            <summary class="form__more-summary">Add more details <span class="form__optional">(optional)</span></summary>
+
+            <div class="form__field">
+              <label for="inutilizzo">How long you haven't used it, and why</label>
+              <textarea id="inutilizzo" name="inutilizzo" rows="3"></textarea>
+            </div>
+
+            <div class="form__field">
+              <label for="motivazione">What would make you say yes to SURAN?</label>
+              <textarea id="motivazione" name="motivazione" rows="3"></textarea>
+            </div>
+          </details>
+
+          <button type="submit" class="btn btn--primary btn--full">Send application</button>
+
+          <p class="form__note">No credit card. No commitment. Just two minutes of your time.</p>
+
+          <p id="form-feedback" class="form__feedback" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FINAL CTA
+    ============================================================= -->
+    <section id="cta-finale" class="section section--alt section--cta-final" aria-labelledby="cta-finale-title">
+      <div class="container container--narrow">
+        <h2 id="cta-finale-title" class="section__title section__title--center">The phone you already have can still surprise you.</h2>
+        <p class="section__text section__text--center">
+          You don't need to buy a new one. Just give it the chance to
+          become what it was — or something better.
+        </p>
+        <div class="cta-final__action">
+          <a href="#apply" class="btn btn--primary">Apply to the Beta Program</a>
+          <p class="hero__cta-note">Two minutes. No commitment.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <p class="site-footer__message">
+        SURAN is just getting started. We're looking for the first people
+        who'll help us build it right.
+      </p>
+      <a href="#apply" class="btn btn--primary btn--small">Apply now</a>
+
+      <p class="site-footer__tagline">SURAN — A second life for the phone you already have.</p>
+
+      <nav class="site-footer__links" aria-label="Secondary footer links">
+        <a href="mailto:info@suran.tech">Contact</a>
+        <a href="privacy-en.html">Privacy</a>
+        <a href="#beta-program">Beta Program</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Main script: shared with the Italian version, form submit,
+       scroll animations and interactions -->
+  <script src="script.js" defer></script>
+
+  <!-- Cloudflare Web Analytics: free, no cookies, no GDPR consent
+       required — same token as the Italian version. -->
+  <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "49f041aa01544f6c89724cd6155f1c4b"}'></script>
+
+</body>
+</html>
