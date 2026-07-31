@@ -551,7 +551,7 @@ p {
 .steps {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-5);
+  gap: var(--space-4);
 }
 
 .step {
@@ -559,11 +559,19 @@ p {
   padding: var(--space-5);
 }
 
-.step__icon {
-  width: 32px;
-  height: 32px;
+/* Icona e tipografia unificate con .why-card/.feature-card (vedi sezioni
+   10/10.1): stesso ruolo — icona guida + titolo + testo — stessa scala. */
+.step__icon,
+.why-card__icon {
+  display: block;
+  width: 28px;
+  height: 28px;
   color: var(--color-accent);
   margin-bottom: var(--space-3);
+}
+
+.step__icon {
+  margin-inline: auto; /* lo step resta centrato, le card restano allineate a sinistra */
 }
 
 .step__number {
@@ -576,11 +584,12 @@ p {
 }
 
 .step__title {
-  font-size: var(--fs-h2);
+  font-size: var(--fs-body-lg);
   margin-bottom: var(--space-2);
 }
 
 .step__text {
+  font-size: var(--fs-small);
   color: var(--color-text-secondary);
   max-width: 32ch;
   margin-inline: auto;
@@ -621,49 +630,23 @@ p {
 
 
 /* --------------------------------------------------------------------------
-   10. FEATURE — card grid
+   10. FEATURE + PERCHÉ SURAN — card grid condivisa
+   Stesso identico trattamento per entrambe le sezioni: sono lo stesso
+   tipo di componente (icona/titolo/testo dentro una card), quindi
+   usano le stesse regole invece di duplicarle. Bordo sottile — non
+   ombra — coerente con l'estetica di riferimento (Nothing/Linear) del
+   Design System, con un hover discreto (leggero sollevamento + bordo
+   che vira verso l'accento, niente ombre pesanti o glow).
 -------------------------------------------------------------------------- */
 
-.feature-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-4);
-}
-
-.feature-card {
-  background-color: var(--color-surface);
-  border-radius: var(--radius);
-  padding: var(--space-5);
-  box-shadow: var(--shadow-soft);
-}
-
-.feature-card__title {
-  font-size: var(--fs-body-lg);
-  margin-bottom: var(--space-2);
-}
-
-.feature-card__text {
-  color: var(--color-text-secondary);
-  font-size: var(--fs-small);
-}
-
-
-/* --------------------------------------------------------------------------
-   10.1 PERCHÉ SURAN — card grid
-   Stessa griglia responsive di .feature-grid (1 colonna mobile, 2
-   tablet, 3 desktop). Bordo sottile invece dell'ombra usata dalle
-   feature card più in basso nella pagina — coerente con la richiesta
-   "bordi sottili" per questa sezione specifica — con un hover molto
-   discreto (leggero sollevamento + bordo che vira verso l'accento,
-   niente ombre pesanti o glow).
--------------------------------------------------------------------------- */
-
+.feature-grid,
 .why-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-4);
 }
 
+.feature-card,
 .why-card {
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -672,24 +655,19 @@ p {
   transition: transform var(--transition-base), border-color var(--transition-fast);
 }
 
+.feature-card:hover,
 .why-card:hover {
   transform: translateY(-4px);
   border-color: var(--color-accent);
 }
 
-.why-card__icon {
-  display: block;
-  width: 28px;
-  height: 28px;
-  color: var(--color-accent);
-  margin-bottom: var(--space-3);
-}
-
+.feature-card__title,
 .why-card__title {
   font-size: var(--fs-body-lg);
   margin-bottom: var(--space-2);
 }
 
+.feature-card__text,
 .why-card__text {
   color: var(--color-text-secondary);
   font-size: var(--fs-small);
@@ -700,7 +678,17 @@ p {
    11. FORM DI CANDIDATURA
 -------------------------------------------------------------------------- */
 
+/* Larghezza massima ridotta rispetto al container che lo ospita (720px):
+   un form più stretto e centrato compone meglio l'attenzione, senza
+   bisogno di colori o cornici diverse dal resto della pagina. Il
+   margine superiore crea una pausa prima della card, il box-shadow
+   (già il più marcato in uso sulla pagina — le altre card usano un
+   bordo sottile, non un'ombra) resta l'unico elemento di elevazione,
+   qui semplicemente lasciato "respirare" di più. */
 .form {
+  max-width: 560px;
+  margin-inline: auto;
+  margin-top: var(--space-5);
   background-color: var(--color-surface);
   border-radius: var(--radius);
   padding: var(--space-5);
@@ -814,8 +802,12 @@ p {
 }
 
 /* Schermata di conferma: sostituisce il form dopo un invio riuscito
-   (creata ed inserita nel DOM da script.js, funzione showConfirmation) */
+   (creata ed inserita nel DOM da script.js, funzione showConfirmation).
+   Stessa larghezza massima di .form, per evitare che la sostituzione
+   cambi proporzione a metà interazione. */
 .form-confirmation {
+  max-width: 560px;
+  margin-inline: auto;
   background-color: var(--color-surface);
   border-radius: var(--radius);
   padding: var(--space-5);
@@ -862,6 +854,11 @@ p {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  transition: color var(--transition-fast);
+}
+
+.faq-item__question:hover {
+  color: var(--color-accent);
 }
 
 /* Rimuove il triangolo di default del browser e ne disegna uno custom */
@@ -876,6 +873,10 @@ p {
   transition: transform var(--transition-fast);
   flex-shrink: 0;
   margin-left: var(--space-3);
+}
+
+.faq-item__question:hover::after {
+  color: var(--color-accent);
 }
 
 .faq-item[open] .faq-item__question::after {
@@ -989,10 +990,7 @@ summary:focus-visible {
     gap: var(--space-4);
   }
 
-  .feature-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
+  .feature-grid,
   .why-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1064,16 +1062,17 @@ summary:focus-visible {
     max-width: 520px;
   }
 
-  .feature-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
+  .feature-grid,
   .why-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 
   .form {
-    padding: var(--space-6);
+    padding: var(--space-7);
+  }
+
+  .form-confirmation {
+    padding: var(--space-7);
   }
 
   /* Su desktop il layout resta a colonna singola per il form:
