@@ -48,10 +48,10 @@ const STRINGS = {
     formInvalid: 'Controlla i campi evidenziati e riprova.',
     sending: 'Invio in corso…',
     sendErrorFallback: 'Invia la candidatura',
-    sendError: 'Non siamo riusciti a inviare la candidatura. Controlla la connessione e riprova.',
+    sendError: 'Non sono riuscito a inviare la candidatura. Controlla la connessione e riprova.',
     thanks: (name) => (name ? `Grazie, ${name}.` : 'Grazie.'),
     confirmText:
-      'La tua candidatura al Programma Beta è stata inviata. Ti risponderemo ' +
+      'La tua candidatura al Programma Beta è stata inviata. Ti risponderò ' +
       'di persona nei prossimi giorni.',
   },
   en: {
@@ -60,10 +60,10 @@ const STRINGS = {
     formInvalid: 'Please check the highlighted fields and try again.',
     sending: 'Sending…',
     sendErrorFallback: 'Send application',
-    sendError: "We couldn't send your application. Check your connection and try again.",
+    sendError: "I couldn't send your application. Check your connection and try again.",
     thanks: (name) => (name ? `Thanks, ${name}.` : 'Thanks.'),
     confirmText:
-      "Your Beta Program application has been sent. We'll get back to " +
+      "Your Beta Program application has been sent. I'll get back to " +
       'you personally within the next few days.',
   },
 };
@@ -519,8 +519,8 @@ function initFormValidation() {
       el: form.querySelector('#modello'),
       required: false,
     },
-    inutilizzo: {
-      el: form.querySelector('#inutilizzo'),
+    esitazione: {
+      el: form.querySelector('#esitazione'),
       required: false,
     },
     motivazione: {
@@ -649,7 +649,11 @@ async function submitForm(form, fields, feedbackEl, submitBtn) {
       throw new Error(serverMessage || `Il server ha risposto con stato ${response.status}`);
     }
 
-    trackEvent('beta_signup_submitted', { hasOptionalDetails: Boolean(fields.inutilizzo.el?.value || fields.motivazione.el?.value) });
+    const preferenzaEsperienza = form.querySelector('input[name="esperienza_ideale"]:checked');
+    trackEvent('beta_signup_submitted', {
+      hasOptionalDetails: Boolean(fields.esitazione.el?.value || fields.motivazione.el?.value),
+      esperienzaIdeale: preferenzaEsperienza ? preferenzaEsperienza.value : null,
+    });
     showConfirmation(form, nomeValue);
   } catch (error) {
     // Errore di rete, endpoint non configurato, o rifiuto del server:
