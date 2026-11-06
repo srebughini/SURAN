@@ -741,6 +741,46 @@ p {
   min-height: 6rem;
 }
 
+/* Blocco di discovery: intro che spiega perché si chiede una domanda su
+   una decisione di prodotto ancora aperta, più il gruppo di opzioni.
+   Nessun colore o stile nuovo: accent-color riusa la stessa variabile
+   dell'accento del brand per tingere i radio nativi, senza dover
+   ridisegnare il controllo da zero. */
+.form__discovery-intro {
+  font-size: var(--fs-small);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-3);
+}
+
+.form__radio-group {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.form__radio-group legend {
+  font-size: var(--fs-small);
+  font-weight: 600;
+  padding: 0;
+  margin-bottom: var(--space-2);
+}
+
+.form__radio-option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding-block: var(--space-1);
+  font-size: var(--fs-body);
+  cursor: pointer;
+}
+
+.form__radio-option input[type="radio"] {
+  accent-color: var(--color-accent);
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
 /* Contenitore <details> dei campi facoltativi: stesso pattern accessibile
    già usato per la FAQ, per ridurre l'attrito visivo iniziale del form. */
 .form__more {
@@ -776,6 +816,13 @@ p {
 .form__note {
   text-align: center;
   margin-top: var(--space-3);
+}
+
+/* Link dentro le note del form (es. Privacy Policy): sottolineato, perché
+   il reset globale rimuove la sottolineatura e il link altrimenti non si distinguerebbe. */
+.form__note a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .form__feedback {
